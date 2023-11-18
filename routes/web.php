@@ -18,3 +18,4 @@ Route::get('/profile/{user:username}', [UserController::class, 'showProfile']);
 Route::get('/create-post', [PostController::class, 'showCreateForm'])->middleware('auth');
 Route::post('/create', [PostController::class, 'storeNewPost'])->middleware('auth');
 Route::get('/post/{content}', [PostController::class, 'showSinglePost']);
+Route::delete('/post/{post}', [PostController::class, 'delete']);

@@ -17,6 +17,15 @@ class PostController extends Controller
            
     }
 
+    public function delete(Post $post){
+        if (auth()->user()->cannot('delete',$post)) {
+                return redirect('401');
+        } 
+        $post->delete();
+        return redirect('/profile/' . auth()->user()->username)->with('success','Post deleted!');
+
+}
+
     public function storeNewPost(Request $request){
       
             $incomingFields = $request->validate([
