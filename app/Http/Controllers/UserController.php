@@ -10,7 +10,7 @@ class UserController extends Controller
 {
     public function logout(){
         auth()->logout();
-        return redirect('/')->with('success','You logged out with success!');;
+        return redirect('/')->with('success','You logged out with success!');
         }
 
 
@@ -22,6 +22,11 @@ class UserController extends Controller
        }
        
     }
+
+    public function showProfile(User $user){
+        $posts = $user->posts()->latest()->get();
+        return view('profile',['username'=>  $user->username,'posts' => $posts,'postCount'=>$posts->count()]);
+        }
 
 
     public function register(Request $request){
@@ -46,7 +51,7 @@ class UserController extends Controller
         $request->session()->regenerate();
         return redirect('/')->with('success','You logged in with success!');
     } else{
-        return redirect('/')->with('failure','Username or Password is invalid!');;
+        return redirect('/')->with('failure','Username or Password is invalid!');
     }
 }
 }

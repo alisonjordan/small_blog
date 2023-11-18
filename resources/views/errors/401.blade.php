@@ -1,5 +1,9 @@
-@extends('errors::minimal')
+<x-layout>
 
-@section('title', __('Unauthorized'))
-@section('code', '401')
-@section('message', __('Unauthorized'))
+    <div class="container py-md-5 container--narrow">
+        <div class="text-center">
+          <h2>Whoops, make login to create an post!</h2>
+        </div>
+      </div>
+    
+    </x-layout>
