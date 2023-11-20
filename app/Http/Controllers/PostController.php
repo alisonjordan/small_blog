@@ -11,6 +11,10 @@ class PostController extends Controller
             return view('create-post'); 
     }
 
+    public function showEditForm(Post $post){
+        return view('edit-post',['post'=>$post]); 
+}
+
     public function showSinglePost(Post $content){
         
             return view('post',['post' => $content]);
@@ -18,11 +22,23 @@ class PostController extends Controller
     }
 
     public function delete(Post $post){
-        if (auth()->user()->cannot('delete',$post)) {
-                return redirect('401');
-        } 
         $post->delete();
         return redirect('/profile/' . auth()->user()->username)->with('success','Post deleted!');
+
+}
+
+public function update(Post $post, Request $request){
+        
+        $incomingFields = $request->validate([
+                'title' => 'required',
+                'body' => 'required'
+            ]);
+
+            $incomingFields['title'] = strip_tags($incomingFields['title']);
+            $incomingFields['body'] = strip_tags($incomingFields['body']);
+
+            $post->update($incomingFields);
+            return redirect("/post/{$post->id}")->with('success','Post updated!');
 
 }
 

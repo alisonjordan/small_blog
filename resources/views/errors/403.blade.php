@@ -1,5 +1,9 @@
-@extends('errors::minimal')
+<x-layout>
 
-@section('title', __('Forbidden'))
-@section('code', '403')
-@section('message', __($exception->getMessage() ?: 'Forbidden'))
+    <div class="container py-md-5 container--narrow">
+        <div class="text-center">
+          <h2>Whoops, unauthorized action! This incident will be reported.</h2>
+        </div>
+      </div>
+    
+    </x-layout>
