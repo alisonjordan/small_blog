@@ -9,6 +9,10 @@ Route::get('/about', function () {
     return view('about');
 });
 
+Route::get('/admin-only', function () {
+    return view('about');    
+})->middleware('can:visitAdminPages');
+
 Route::get('/', [UserController::class, 'showCorrectPage'])->name('login');
 Route::post('/register', [UserController::class, 'register'])->middleware('guest');
 Route::post('/login', [UserController::class, 'login'])->middleware('guest');
