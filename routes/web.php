@@ -18,6 +18,9 @@ Route::post('/register', [UserController::class, 'register'])->middleware('guest
 Route::post('/login', [UserController::class, 'login'])->middleware('guest');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/profile/{user:username}', [UserController::class, 'showProfile']);
+Route::get('/manage-avatar', [UserController::class, 'showAvatarManageForm']);
+Route::post('/manage-avatar', [UserController::class, 'storeAvatar']);
+
 
 Route::get('/create-post', [PostController::class, 'showCreateForm'])->middleware('auth');
 Route::post('/create', [PostController::class, 'storeNewPost'])->middleware('auth');

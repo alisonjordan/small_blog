@@ -28,6 +28,16 @@ class UserController extends Controller
         return view('profile',['username'=>  $user->username,'posts' => $posts,'postCount'=>$posts->count()]);
         }
 
+    public function showAvatarManageForm(){
+        return view('avatar-form');
+        }
+
+    public function storeAvatar(Request $request){
+        $request->file('avatar')->store('public/avatars');
+        return 'hey';
+       
+        }
+
 
     public function register(Request $request){
         $incomingFields = $request->validate([
