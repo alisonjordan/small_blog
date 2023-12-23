@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Intervention\Image\Facades\Image;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -33,8 +35,16 @@ class UserController extends Controller
         }
 
     public function storeAvatar(Request $request){
-        $request->file('avatar')->store('public/avatars');
-        return 'hey';
+        $request->validate([
+            'avatar' => 'required|image|max:5000'
+        ]);
+
+        $user = auth()->user();
+
+        $filename = $user->id . '-' . uniqid() . '.jpg';
+
+        $imgData = Image::make($request->file('avatar'))->fit(120)->encode('jpg');
+        Storage::put('public/avatars/' . $filename, $imgData);
        
         }
 
