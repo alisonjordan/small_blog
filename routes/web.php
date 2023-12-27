@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\FollowController;
 
 //SITE RELATED ROUTES
 Route::get('/about', function () {
@@ -23,6 +24,10 @@ Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/profile/{user:username}', [UserController::class, 'showProfile']);
 Route::get('/manage-avatar', [UserController::class, 'showAvatarManageForm'])->middleware('auth');
 Route::post('/manage-avatar', [UserController::class, 'storeAvatar'])->middleware('auth');
+
+//FOLLOWS ROUTES
+Route::post('/create-follow/{user:username}', [FollowController::class, 'storeFollow'])->middleware('auth');
+Route::delete('/remove-follow/{user:username}', [FollowController::class, 'deleteFollow'])->middleware('auth');
 
 //POST RELATED ROUTES
 Route::get('/create-post', [PostController::class, 'showCreateForm'])->middleware('auth');

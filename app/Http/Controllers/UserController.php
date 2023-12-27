@@ -27,7 +27,7 @@ class UserController extends Controller
 
     public function showProfile(User $user){
         $posts = $user->posts()->latest()->get();
-        return view('profile',['username'=>  $user->username,'posts' => $posts,'postCount'=>$posts->count()]);
+        return view('profile',['avatar' =>  $user->avatar ,'username'=>  $user->username,'posts' => $posts,'postCount'=>$posts->count()]);
         }
 
     public function showAvatarManageForm(){
