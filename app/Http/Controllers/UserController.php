@@ -45,6 +45,17 @@ class UserController extends Controller
         //still to find a proper way to use intevention image v3
         $imgData = Image::make($request->file('avatar'))->fit(120)->encode('jpg');
         Storage::put('public/avatars/' . $filename, $imgData);
+
+        $oldAvatar = $user->avatar; 
+
+        $user->avatar = $filename;
+        $user->save();
+
+        if($oldAvatar != "/fallback-avatar.jpg"){
+            Storage::delete(str_replace("/storage/","public/",$oldAvatar));
+        }
+
+        return redirect('/')->with('success','Avatar image updated!');
        
         }
 
