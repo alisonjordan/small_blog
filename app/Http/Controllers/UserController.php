@@ -42,7 +42,7 @@ class UserController extends Controller
         $user = auth()->user();
 
         $filename = $user->id . '-' . uniqid() . '.jpg';
-
+        //still to find a proper way to use intevention image v3
         $imgData = Image::make($request->file('avatar'))->fit(120)->encode('jpg');
         Storage::put('public/avatars/' . $filename, $imgData);
        
