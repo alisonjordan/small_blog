@@ -22,6 +22,8 @@ Route::post('/register', [UserController::class, 'register'])->middleware('guest
 Route::post('/login', [UserController::class, 'login'])->middleware('guest');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 Route::get('/profile/{user:username}', [UserController::class, 'showProfile']);
+Route::get('/profile/{user:username}/followers', [UserController::class, 'showFollowers']);
+Route::get('/profile/{user:username}/following', [UserController::class, 'showFollowing']);
 Route::get('/manage-avatar', [UserController::class, 'showAvatarManageForm'])->middleware('auth');
 Route::post('/manage-avatar', [UserController::class, 'storeAvatar'])->middleware('auth');
 
