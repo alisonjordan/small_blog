@@ -21,6 +21,14 @@ class PostController extends Controller
            
     }
 
+    public function search($term){
+        
+        $posts = Post::search($term)->get();
+        $posts->load('authorPost:id,username,avatar');
+        return $posts;
+       
+}
+
     public function delete(Post $post){
         $post->delete();
         return redirect('/profile/' . auth()->user()->username)->with('success','Post deleted!');
